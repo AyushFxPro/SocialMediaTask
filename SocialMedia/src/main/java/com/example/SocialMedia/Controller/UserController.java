@@ -41,13 +41,13 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/getUser")
+    @GetMapping("/getUser/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable String userId) {
         User user = userService.getUserById(userId);
         return ResponseEntity.ok(user);
     }
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/deleteUser")
+    @DeleteMapping("/deleteUser/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok("User deleted successfully");

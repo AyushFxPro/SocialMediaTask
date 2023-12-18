@@ -33,19 +33,19 @@ public class UserInteractionController {
         return ResponseEntity.ok(shares);
     }
 
-    @PostMapping("/like")
+    @PostMapping("/like/{userId}/{postId}")
     public ResponseEntity<String> trackLike(@RequestParam String userId, @RequestParam String postId) {
         userInteractionService.trackLike(userId, postId);
         return ResponseEntity.ok("Like tracked successfully");
     }
 
-    @PostMapping("/comment")
+    @PostMapping("/comment/{userId}/{postId}/{test}")
     public ResponseEntity<String> trackComment(@RequestParam String userId, @RequestParam String postId, @RequestParam String text) {
         userInteractionService.trackComment(userId, postId, text);
         return ResponseEntity.ok("Comment tracked successfully");
     }
 
-    @PostMapping("/share")
+    @PostMapping("/share/{userId}/{postId}")
     public ResponseEntity<String> trackShare(@RequestParam String userId, @RequestParam String postId) {
         userInteractionService.trackShare(userId, postId);
         return ResponseEntity.ok("Share tracked successfully");

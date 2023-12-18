@@ -19,7 +19,7 @@ public class FollowController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/follow")
+    @PostMapping("/follow/{followerId}/{followeeId}")
     public ResponseEntity<String> followUser(@RequestParam String followerId, @RequestParam String followeeId) {
         // Get users by their IDs
         User follower = userRepository.findById(followerId)

@@ -18,7 +18,7 @@ public class FriendshipController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/request")
+    @PostMapping("/request/{userId}/{friendId}")
     public ResponseEntity<String> sendFriendRequest(@RequestParam String userId, @RequestParam String friendId) {
         // Get users by their IDs
         User user = userRepository.findById(userId)
@@ -31,13 +31,13 @@ public class FriendshipController {
         return ResponseEntity.ok("Friend request sent successfully");
     }
 
-    @PostMapping("/accept")
+    @PostMapping("/accept/{friendshipId}")
     public ResponseEntity<String> acceptFriendRequest(@RequestParam String friendshipId) {
         friendshipService.acceptFriendRequest(friendshipId);
         return ResponseEntity.ok("Friend request accepted");
     }
 
-    @PostMapping("/reject")
+    @PostMapping("/reject/{friendshipId}")
     public ResponseEntity<String> rejectFriendRequest(@RequestParam String friendshipId) {
         friendshipService.rejectFriendRequest(friendshipId);
         return ResponseEntity.ok("Friend request rejected");
