@@ -1,5 +1,6 @@
 package com.example.SocialMedia.Service;
 
+import com.example.SocialMedia.Dto.LoginRequestDto;
 import com.example.SocialMedia.Dto.UserRequestDto;
 import com.example.SocialMedia.Entity.User;
 import com.example.SocialMedia.Repository.UserRepository;
@@ -67,5 +68,16 @@ public class UserService {
     public List<User> getAllUsers() {
         // Retrieve all users from the repository
         return userRepository.findAll();
+    }
+
+    public void loginUser(LoginRequestDto loginRequest) {
+        User user = userRepository.findByUsername(loginRequest.getUsername());
+                if (user==null){
+                    throw new RuntimeException("Invalid username or password");
+                }
+
+        if (loginRequest.getPassword()!= user.getPassword()) {
+            throw new RuntimeException("Invalid username or password");
+        }
     }
 }
