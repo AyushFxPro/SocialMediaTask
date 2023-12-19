@@ -23,7 +23,7 @@ public class Comment {
     private String id;
     private String userId;
     private String postId;
-    private String text;
+    private String comment;
     private LocalDateTime timestamp;
 
 }

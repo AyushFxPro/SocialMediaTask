@@ -27,8 +27,7 @@ public class UserProfile {
     private String profilePicture;
     @DBRef
     private List<Repost> reposts = new ArrayList<>();
-    @DBRef
-    private List<Post> posts=new ArrayList<>();
+    private List<String> posts=new ArrayList<>();
     @DBRef(lazy = true)
     private List<String> friendsId;
 

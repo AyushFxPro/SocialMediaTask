@@ -47,7 +47,7 @@ public class UserInteractionService {
         Comment comment = new Comment();
         comment.setUserId(userId);
         comment.setPostId(postId);
-        comment.setText(text);
+        comment.setComment(text);
         comment.setTimestamp(LocalDateTime.now());
         commentRepository.save(comment);
     }

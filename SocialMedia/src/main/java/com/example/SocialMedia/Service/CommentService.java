@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -22,11 +23,10 @@ public class CommentService {
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
             Comment comment = new Comment();
-            comment.setText(text);
-
-            post.getComments().add(comment);
+            comment.setComment(text);
+            comment.setPostId(post.getId());
+            post.getComments().add(comment.getComment());
             postRepository.save(post);
-
             return commentRepository.save(comment);
         } else {
             throw new RuntimeException("Post not found");

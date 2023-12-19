@@ -31,27 +31,23 @@ public class PostService {
 
     public Post createPost(CreatePostDto createPostDto) throws  IOException {
         Post post = new Post();
-        //createPostDto.getUserId()
         post.setUserId(createPostDto.getUserId());
         post.setText(createPostDto.getText());
         post.setImage(createPostDto.getImage());
         post.setVideo(createPostDto.getVideo());
         post.setPrivacySetting(createPostDto.getPrivacySetting());
+        Post savedpost=postRepository.save(post);
         Optional<UserProfile> optionalUserProfile=userPofileRepository.findById(createPostDto.getUserId());
         if(optionalUserProfile.isPresent()){
            UserProfile userProfile=optionalUserProfile.get();
-            userProfile.getPosts().add(post);
+            userProfile.getPosts().add(post.getId());
             userPofileRepository.save(userProfile);
         }
 
-        return postRepository.save(post);
+        return savedpost;
     }
 
     public List<Post> getPostsForUser(String ownerId, String viewerId) {
-//        Optional<UserProfile> optionalUserProfile=userPofileRepository.findById(ownerId);
-//        if(optionalUserProfile.isPresent()){
-//            UserProfile userProfile=optionalUserProfile.get();
-//        }
 
         Optional<UserProfile> optionalUserProfile = userPofileRepository.findById(ownerId);
 

@@ -20,7 +20,7 @@ public class MessageController {
         return ResponseEntity.ok(messages);
     }
 
-    @PostMapping("/send/{senderId}/{receiverId}/{content}")
+    @PostMapping("/send")
     public ResponseEntity<Message> sendMessage(@RequestParam String senderId, @RequestParam String receiverId, @RequestParam String content) {
         Message message = messageService.sendMessage(senderId, receiverId, content);
         return ResponseEntity.ok(message);

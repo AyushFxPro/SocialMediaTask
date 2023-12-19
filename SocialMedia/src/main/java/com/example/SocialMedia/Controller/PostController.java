@@ -1,5 +1,6 @@
 package com.example.SocialMedia.Controller;
 
+import com.example.SocialMedia.Dto.CreateCommentRequestDto;
 import com.example.SocialMedia.Dto.CreatePostDto;
 import com.example.SocialMedia.Entity.Comment;
 import com.example.SocialMedia.Entity.Post;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/socialmedia")
 public class PostController {
     @Autowired
     PostService postService;
@@ -31,9 +33,10 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @PostMapping("/{postId}/comments")
-    public ResponseEntity<Comment> addComment(@PathVariable String postId,
-                                              @RequestParam("text") String text) {
+    @PostMapping("/addComment")
+    public ResponseEntity<Comment> addComment(@RequestBody CreateCommentRequestDto createCommentRequestDto) {
+        String postId= createCommentRequestDto.getPostId();
+        String text= createCommentRequestDto.getComment();
         try {
             Comment comment = commentService.addComment(postId, text);
             return ResponseEntity.ok(comment);

@@ -33,7 +33,7 @@ public class UserInteractionController {
         return ResponseEntity.ok(shares);
     }
 
-    @PostMapping("/like/{userId}/{postId}")
+    @PostMapping("/like")
     public ResponseEntity<String> trackLike(@RequestParam String userId, @RequestParam String postId) {
         userInteractionService.trackLike(userId, postId);
         return ResponseEntity.ok("Like tracked successfully");

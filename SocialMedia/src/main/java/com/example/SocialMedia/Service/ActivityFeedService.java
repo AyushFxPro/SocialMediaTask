@@ -83,7 +83,7 @@ public class ActivityFeedService {
 
     private List<ActivityFeedItem> convertCommentsToActivityFeedItems(List<Comment> comments) {
         return comments.stream()
-                .map(comment -> new ActivityFeedItem(comment.getText(), comment.getTimestamp(), "COMMENT"))
+                .map(comment -> new ActivityFeedItem(comment.getComment(), comment.getTimestamp(), "COMMENT"))
                 .collect(Collectors.toList());
     }
 

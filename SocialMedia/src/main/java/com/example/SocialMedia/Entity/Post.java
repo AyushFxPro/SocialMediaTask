@@ -29,7 +29,6 @@ public class Post {
     private String image;
     private String video;
     private LocalDateTime timestamp;
-    @DBRef
-    private List<Comment> comments = new ArrayList<>();
+    private List<String> comments = new ArrayList<>();
     private PrivacySetting privacySetting;
 }

@@ -36,6 +36,10 @@ public class SpringSecurityConfig {
                 .permitAll()
                 .requestMatchers("/Socialmedia/user/update")
                 .permitAll()
+                .requestMatchers("/Socialmedia/userprofile/create")
+                .permitAll()
+                .requestMatchers("/Socialmedia/user/register")
+                .permitAll()
                 .requestMatchers("/Socialmedia/user/getUser/**")
                 .hasAnyRole("ADMIN")
                 .requestMatchers("/Socialmedia/user/deleteUser/**")
@@ -43,7 +47,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/Socialmedia/user/getAllUsers/**")
                 .hasRole("ADMIN")
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and()
                 .formLogin();
 
