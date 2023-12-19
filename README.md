@@ -1,4 +1,5 @@
 Social Media Platform - README
+
 Overview
 This Social Media Platform is a web application built using Java and the Spring Boot framework. The platform provides various features including user management, post creation, commenting, liking, sharing, messaging, friend requests, and following functionalities. The application also incorporates Spring Security for user authentication and authorization.
 
