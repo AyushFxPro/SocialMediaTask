@@ -61,13 +61,17 @@ The application uses Mongodb as the database. Database configuration details can
 properties
 
 spring.data.mongodb.host=localhost
+
 spring.data.mongodb.port=27017
+
 spring.data.mongodb.database=socialmedia
 
 Note
+
 Ensure that you have Java, Maven, and Mongodb installed on your machine before running the application.
 
 Feel free to explore the codebase and enhance the application based on your requirements! 
 
 Happy coding!
+
 Thanks!
