@@ -59,6 +59,7 @@ Database Configuration
 The application uses Mongodb as the database. Database configuration details can be found in the application.properties file.
 
 properties
+
 spring.data.mongodb.host=localhost
 spring.data.mongodb.port=27017
 spring.data.mongodb.database=socialmedia
