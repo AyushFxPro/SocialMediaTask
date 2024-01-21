@@ -21,11 +21,11 @@ public class Friendship {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
-    @DBRef
-    private User user;
+    //@DBRef
+    private String userId;
 
-    @DBRef
-    private User friend;
+    //@DBRef
+    private String friendId;
 
     private FriendshipStatus status;
 }

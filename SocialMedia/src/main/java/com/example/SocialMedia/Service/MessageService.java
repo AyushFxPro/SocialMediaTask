@@ -6,6 +6,9 @@ import com.example.SocialMedia.Entity.Conversation;
 import com.example.SocialMedia.Repository.MessageRepository;
 import com.example.SocialMedia.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,6 +26,8 @@ public class MessageService {
 
     @Autowired
     ConversationRepository conversationRepository;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<Message> getMessagesBetweenUsers(String senderId, String receiverId) {
         // Fetch or create a conversation between two users
@@ -41,6 +46,7 @@ public class MessageService {
         message.setSenderId(senderId);
         message.setContent(content);
         message.setTimestamp(LocalDateTime.now());
+        messageRepository.save(message);
 
         // Add the message to the conversation and save
         conversation.getMessages().add(message);
@@ -51,7 +57,20 @@ public class MessageService {
 
     private Conversation getOrCreateConversation(String userId1, String userId2) {
         // Try to find an existing conversation
-        Optional<Conversation> existingConversation = conversationRepository.findByParticipantIdsContainsAndParticipantIdsContains(userId1, userId2);
+//        Optional<Conversation> existingConversation = conversationRepository.findByParticipantIdsContainsAndParticipantIdsContains(userId1, userId2);
+//
+//        return existingConversation.orElseGet(() -> {
+//            // If no existing conversation, create a new one
+//            List<String> participantIds = Arrays.asList(userId1, userId2);
+//            Conversation newConversation = new Conversation();
+//            newConversation.setParticipantIds(participantIds);
+//            return conversationRepository.save(newConversation);
+//        });
+        Criteria criteria = Criteria.where("participantIds").in(userId1, userId2);
+        Query query = new Query(criteria);
+
+        // Try to find an existing conversation
+        Optional<Conversation> existingConversation = Optional.ofNullable(mongoTemplate.findOne(query, Conversation.class));
 
         return existingConversation.orElseGet(() -> {
             // If no existing conversation, create a new one

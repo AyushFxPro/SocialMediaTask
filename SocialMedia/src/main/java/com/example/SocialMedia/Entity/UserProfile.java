@@ -1,5 +1,8 @@
 package com.example.SocialMedia.Entity;
 
+import com.example.SocialMedia.Dto.CreatePostDto;
+import com.example.SocialMedia.Dto.UserProfileDto;
+import com.example.SocialMedia.Dto.UserRequestDto;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.*;
@@ -22,22 +25,24 @@ public class UserProfile {
 
     @DBRef
     private User user;
+    private String emailId;
 
     private String bio;
     private String profilePicture;
     @DBRef
     private List<Repost> reposts = new ArrayList<>();
-    private List<String> posts=new ArrayList<>();
-    @DBRef(lazy = true)
-    private List<String> friendsId;
+    private List<CreatePostDto> posts=new ArrayList<>();
+    //@DBRef(lazy = true)
+    private List<String> friends=new ArrayList<>();
+    private List<UserProfileDto> waitingRequests=new ArrayList<>();
 
 
 
-    @DBRef(lazy = true)
-    private List<Follow> followers;
+//    @DBRef(lazy = true)
+    private List<UserRequestDto> followers=new ArrayList<>();
 
     public boolean isFriend(String userId) {
-        if(friendsId.contains(userId)){
+        if(friends.contains(userId)){
             return true;
         }
         return false;

@@ -1,5 +1,6 @@
 package com.example.SocialMedia.Entity;
 
+import com.example.SocialMedia.Dto.UserRequestDto;
 import com.example.SocialMedia.Enum.PrivacySetting;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,5 +31,6 @@ public class Post {
     private String video;
     private LocalDateTime timestamp;
     private List<String> comments = new ArrayList<>();
+    private List<UserRequestDto> likes=new ArrayList<>();
     private PrivacySetting privacySetting;
 }

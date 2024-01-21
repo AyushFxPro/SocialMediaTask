@@ -17,7 +17,7 @@ public class CommentService {
     PostRepository postRepository;
     @Autowired
     CommentRepository commentRepository;
-    public Comment addComment(String postId, String text) {
+    public Comment addComment(String postId, String text,String userId) {
         Optional<Post> postOptional = postRepository.findById(postId);
 
         if (postOptional.isPresent()) {
@@ -25,6 +25,7 @@ public class CommentService {
             Comment comment = new Comment();
             comment.setComment(text);
             comment.setPostId(post.getId());
+            comment.setUserId(userId);
             post.getComments().add(comment.getComment());
             postRepository.save(post);
             return commentRepository.save(comment);

@@ -45,7 +45,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/Socialmedia/user/deleteUser/**")
                 .hasRole("ADMIN")
                 .requestMatchers("/Socialmedia/user/getAllUsers/**")
-                .hasRole("ADMIN")
+                .permitAll()
                 .anyRequest()
                 .permitAll()
                 .and()

@@ -14,6 +14,7 @@ public class UserProfileService {
     public UserProfile createUserProfile(UserProfileDto userProfileDto, User user) {
         UserProfile userProfile = new UserProfile();
         userProfile.setUser(user);
+        userProfile.setEmailId(userProfileDto.getEmail());
         userProfile.setBio(userProfileDto.getBio());
         userProfile.setProfilePicture(userProfileDto.getProfilePicture());
         UserProfile savedUserProfile=userPofileRepository.save(userProfile);

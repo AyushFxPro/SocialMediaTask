@@ -2,7 +2,9 @@ package com.example.SocialMedia.Controller;
 
 import com.example.SocialMedia.Dto.CreateCommentRequestDto;
 import com.example.SocialMedia.Dto.CreatePostDto;
+import com.example.SocialMedia.Dto.LikeRequestDto;
 import com.example.SocialMedia.Entity.Comment;
+import com.example.SocialMedia.Entity.Like;
 import com.example.SocialMedia.Entity.Post;
 import com.example.SocialMedia.Service.CommentService;
 import com.example.SocialMedia.Service.PostService;
@@ -37,9 +39,23 @@ public class PostController {
     public ResponseEntity<Comment> addComment(@RequestBody CreateCommentRequestDto createCommentRequestDto) {
         String postId= createCommentRequestDto.getPostId();
         String text= createCommentRequestDto.getComment();
+        String userId= createCommentRequestDto.getUserId();
         try {
-            Comment comment = commentService.addComment(postId, text);
+            Comment comment = commentService.addComment(postId, text,userId);
             return ResponseEntity.ok(comment);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @PostMapping("/addLike")
+    public ResponseEntity<Like> addLike(@RequestBody LikeRequestDto createLikeRequestDto) {
+        String postId = createLikeRequestDto.getPostId();
+        String userId = createLikeRequestDto.getUserId();
+
+        try {
+            Like like = postService.addLike(postId, userId);
+            return ResponseEntity.ok(like);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
